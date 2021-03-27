@@ -1,9 +1,6 @@
 package br.com.bei.moviesapi.pais;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -11,8 +8,9 @@ import javax.validation.Valid;
 @RequestMapping ("/api/pais")
 public class PaisController {
 
-    @GetMapping
-    public String createPais(){
-        return "hello world";
+    @PostMapping
+    public String createPais( @RequestBody @Valid PaisRequest request){
+        Pais pais = request.toModel();
+        return pais.toString();
     }
 }
