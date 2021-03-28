@@ -1,12 +1,13 @@
 package br.com.bei.moviesapi.pais;
 
+import br.com.bei.moviesapi.config.validator.MustBeUnique;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.validation.constraints.NotBlank;
 
 public class PaisRequest {
-    @NotBlank
+    @NotBlank @MustBeUnique(target = Pais.class, column = "nome")
     private String nome;
 
     @JsonCreator
