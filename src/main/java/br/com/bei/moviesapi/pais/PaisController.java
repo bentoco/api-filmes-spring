@@ -14,7 +14,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping ("/api/pais")
+@RequestMapping ( "/api/pais" )
 public class PaisController {
 
     @Autowired
@@ -26,7 +26,9 @@ public class PaisController {
 
     @PostMapping
     @Transactional
-    public ResponseEntity<PaisResponse> createPais( @RequestBody @Valid PaisRequest request, UriComponentsBuilder uriBuilder ){
+    public ResponseEntity<PaisResponse> createPais (
+            @RequestBody @Valid PaisRequest request ,
+            UriComponentsBuilder uriBuilder ) {
         Pais pais = request.toModel();
         repository.save(pais);
 
@@ -34,15 +36,15 @@ public class PaisController {
         return ResponseEntity.created(uri).body(new PaisResponse(pais));
     }
 
-    @GetMapping("/{id}")
+    @GetMapping ( "/{id}" )
     @Transactional
-    public ResponseEntity<PaisResponse> readPais(@PathVariable Long id){
+    public ResponseEntity<PaisResponse> readPais ( @PathVariable Long id ) {
         Optional<Pais> pais = repository.findById(id);
         return pais.map(value -> ResponseEntity.ok().body(new PaisResponse(value))).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @GetMapping
-    public Collection<PaisResponse> listPais(){
+    public Collection<PaisResponse> listPais () {
         List<Pais> all = repository.findAll();
         return all.stream().map(PaisResponse::new).collect(Collectors.toList());
     }

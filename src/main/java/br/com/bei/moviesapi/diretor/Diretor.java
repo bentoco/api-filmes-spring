@@ -9,14 +9,17 @@ import java.time.LocalDate;
 
 @Entity
 public class Diretor {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue ( strategy = GenerationType.IDENTITY )
     private Long id;
-    @Column(nullable = false)
+    @Column ( nullable = false )
     private String nome;
-    @NotNull @Column(nullable = false)
-    @JsonFormat(pattern = "dd/MM/yyyy", shape= JsonFormat.Shape.STRING)
+    @NotNull
+    @Column ( nullable = false )
+    @JsonFormat ( pattern = "dd/MM/yyyy", shape = JsonFormat.Shape.STRING )
     private LocalDate dataNascimento;
-    @ManyToOne @JoinColumn(name = "pais_id", foreignKey = @ForeignKey(name ="PAIS_ID_FK"))
+    @ManyToOne
+    @JoinColumn ( name = "pais_id", foreignKey = @ForeignKey ( name = "PAIS_ID_FK" ) )
     private Pais pais;
 
     public Diretor ( String nome , LocalDate dataNascimento , Pais pais ) {
@@ -25,12 +28,24 @@ public class Diretor {
         this.pais = pais;
     }
 
+    public Diretor () {
+
+    }
+
     public Long getId () {
         return id;
     }
 
     public String getNome () {
         return nome;
+    }
+
+    public LocalDate getDataNascimento () {
+        return dataNascimento;
+    }
+
+    public Pais getPais () {
+        return pais;
     }
 
     @Override public String toString () {
